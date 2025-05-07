@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Icons</title>
+</head>
+<body>
+    <canvas id="icon192" width="192" height="192"></canvas>
+    <canvas id="icon512" width="512" height="512"></canvas>
+    <script>
+        function generateIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#4F46E5'; // Indigo color matching our theme
+            ctx.fillRect(0, 0, size, size);
+            
+            // Store icon (simplified shopping bag)
+            ctx.fillStyle = '#FFFFFF';
+            const padding = size * 0.2;
+            const width = size - (padding * 2);
+            const height = width * 0.8;
+            
+            // Draw bag body
+            ctx.fillRect(padding, padding + (width * 0.2), width, height);
+            
+            // Draw bag handles
+            const handleWidth = width * 0.3;
+            const handleHeight = width * 0.2;
+            const handleX = padding + (width - handleWidth) / 2;
+            ctx.fillRect(handleX, padding, handleWidth, handleHeight);
+            
+            // Save as PNG
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Generate both sizes
+        generateIcon(document.getElementById('icon192'), 192);
+        generateIcon(document.getElementById('icon512'), 512);
+    </script>
+</body>
+</html>
